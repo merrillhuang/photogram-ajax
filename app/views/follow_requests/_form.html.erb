@@ -1,4 +1,4 @@
-<div id="sender_<%= @follow_request.sender.id %>_recipient_<%= @follow_request.recipient.id %>_follow_unfollow">  
+<div id="sender_<%= follow_request.sender_id %>_recipient_<%= follow_request.recipient_id %>_follow_unfollow">  
   <%= form_with(model: follow_request, class: "d-inline-block", local: false) do |form| %>
     <% if follow_request.errors.any? %>
       <div id="error_explanation">
