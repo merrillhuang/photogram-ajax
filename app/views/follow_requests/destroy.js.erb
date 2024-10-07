@@ -1,0 +1,3 @@
+var follow_unfollow_button = $('a[href="/follow_requests/<%= @follow_request.id %>"]');
+
+follow_unfollow_button.replaceWith("<%= escape_javascript(render "follow_requests/form", follow_request: @follow_request.recipient.received_follow_requests.build) %>");
