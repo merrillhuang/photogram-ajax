@@ -1,19 +1,21 @@
-<%= form_with(model: follow_request, class: "d-inline-block", local: false) do |form| %>
-  <% if follow_request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(follow_request.errors.count, "error") %> prohibited this follow_request from being saved:</h2>
+<div id="sender_<%= @follow_request.sender.id %>_recipient_<%= @follow_request.recipient.id %>_follow_unfollow">  
+  <%= form_with(model: follow_request, class: "d-inline-block", local: false) do |form| %>
+    <% if follow_request.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(follow_request.errors.count, "error") %> prohibited this follow_request from being saved:</h2>
 
-      <ul>
-        <% follow_request.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% follow_request.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form.hidden_field :recipient_id %>
+
+    <div class="actions">
+      <%= form.submit "Follow", class: "btn btn-outline-secondary btn-block" %>
     </div>
   <% end %>
-
-  <%= form.hidden_field :recipient_id %>
-
-  <div class="actions">
-    <%= form.submit "Follow", class: "btn btn-outline-secondary btn-block" %>
-  </div>
-<% end %>
+<div>
