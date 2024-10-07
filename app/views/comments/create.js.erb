@@ -1,1 +1,3 @@
-console.log("<%= @comment.body %>")
+let added_comment = $("<p><%= @comment.body %></p>");
+
+$("#<%= dom_id(@comment.photo) %>_new_comment_form").before(added_comment);
