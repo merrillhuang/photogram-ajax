@@ -1,10 +1,10 @@
-<div id="sender_<%= sender.id %>_recipient_<%= recipient.id %>_follow_unfollow">  
+<div class="sender_<%= sender.id %>_recipient_<%= recipient.id %>_follow_unfollow">  
   <% unless sender == recipient %>
     <% follow_request = current_user.sent_follow_requests.find_by(recipient: recipient) %>
     <% return_follow_request = current_user.received_follow_requests.find_by(sender: recipient) %>
 
     <% if follow_request %>
-      <% if return_follow_request.accepted? %>
+      <% if return_follow_request && return_follow_request.accepted? %>
         <%= link_to follow_request, method: :delete, class: "btn btn-outline-secondary", remote:true do %>
           Un-follow
         <% end %>
