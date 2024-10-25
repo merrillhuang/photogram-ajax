@@ -1,26 +1,17 @@
-<div class="sender_<%= sender.id %>_recipient_<%= recipient.id %>_follow_unfollow">  
-  <% unless sender == recipient %>
-    <% follow_request = current_user.sent_follow_requests.find_by(recipient: recipient) %>
-    <% return_follow_request = current_user.received_follow_requests.find_by(sender: recipient) %>
+<% unless sender == recipient %>
+  <% follow_request = current_user.sent_follow_requests.find_by(recipient: recipient) %>
 
-    <% if follow_request %>
-      <% if return_follow_request && return_follow_request.accepted? %>
-        <%= link_to follow_request, method: :delete, class: "btn btn-outline-secondary", remote:true do %>
-          Un-follow
-        <% end %>
-      <% else %>
-        <% if follow_request.pending? %>
-          <%= link_to follow_request, method: :delete, class: "btn btn-outline-secondary", remote: true do %>
-            Un-request
-          <% end %>
-        <% elsif follow_request.accepted? %>
-          <%= link_to follow_request, method: :delete, class: "btn btn-outline-secondary", remote:true do %>
-            Un-follow
-          <% end %>
-        <% end %>
+  <% if follow_request %>
+    <% if follow_request.pending? %>
+      <%= link_to follow_request, method: :delete, class: "btn btn-outline-secondary sender_#{follow_request.sender_id}_recipient_#{follow_request.recipient_id}", remote: true do %>
+        Un-request
       <% end %>
-    <% else %>
-      <%= render "follow_requests/form", follow_request: recipient.received_follow_requests.build %>
+    <% elsif follow_request.accepted? %>
+      <%= link_to follow_request, method: :delete, class: "btn btn-outline-secondary sender_#{follow_request.sender_id}_recipient_#{follow_request.recipient_id}", id: dom_id(follow_request.sender)+dom_id(follow_request.recipient), remote: true do %>
+        Un-follow
+      <% end %>
     <% end %>
+  <% else %>
+    <%= render "follow_requests/form", follow_request: FollowRequest.new(sender_id: sender.id, recipient_id: recipient.id) %>
   <% end %>
-</div>
+<% end %>
