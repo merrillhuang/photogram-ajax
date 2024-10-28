@@ -1,0 +1,5 @@
+var editing_comment = $("#comment_<%= @comment.id %>");
+
+var editing_form = $("<%= escape_javascript(render 'comments/form', comment: @comment) %>");
+
+editing_comment.replaceWith(editing_form);

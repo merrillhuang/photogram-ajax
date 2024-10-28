@@ -1,0 +1,3 @@
+var like_display = $("#<%= dom_id(@like.photo) %>_likes");
+
+like_display.replaceWith("<%= escape_javascript(render "photos/likes", photo: @like.photo) %>");

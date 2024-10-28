@@ -1,0 +1,3 @@
+var updated_comment = $("<%= escape_javascript(render 'comments/comment', comment: @comment) %>");
+
+$("#<%= dom_id(@comment.photo) %>_<%= dom_id(@comment) %>_form").replaceWith(updated_comment);

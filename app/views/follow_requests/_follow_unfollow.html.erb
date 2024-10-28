@@ -3,15 +3,15 @@
 
   <% if follow_request %>
     <% if follow_request.pending? %>
-      <%= link_to follow_request,  data: { turbo_method: :delete }, class: "btn btn-outline-secondary" do %>
+      <%= link_to follow_request, method: :delete, class: "btn btn-outline-secondary sender_#{follow_request.sender_id}_recipient_#{follow_request.recipient_id}", remote: true do %>
         Un-request
       <% end %>
     <% elsif follow_request.accepted? %>
-      <%= link_to follow_request,  data: { turbo_method: :delete }, class: "btn btn-outline-secondary" do %>
+      <%= link_to follow_request, method: :delete, class: "btn btn-outline-secondary sender_#{follow_request.sender_id}_recipient_#{follow_request.recipient_id}", remote: true do %>
         Un-follow
       <% end %>
     <% end %>
   <% else %>
-    <%= render "follow_requests/form", follow_request: recipient.received_follow_requests.build %>
+    <%= render "follow_requests/form", follow_request: FollowRequest.new(sender_id: sender.id, recipient_id: recipient.id) %>
   <% end %>
 <% end %>
